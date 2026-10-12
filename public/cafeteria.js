@@ -4,7 +4,89 @@ const orderMessage = document.querySelector('#order-message');
 const orderTotal = document.querySelector('#order-total');
 const checkoutButton = document.querySelector('#checkout-button');
 const toast = document.querySelector('#toast');
+const orderHistory = document.querySelector('#order-history');
+const historyEmpty = document.querySelector('#history-empty');
 let toastTimer;
+const ORDER_DATABASE = 'cafe-de-barrio';
+const ORDER_STORE = 'orders';
+
+function openOrderDatabase() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(ORDER_DATABASE, 1);
+
+        request.addEventListener('upgradeneeded', () => {
+            const database = request.result;
+            if (!database.objectStoreNames.contains(ORDER_STORE)) {
+                database.createObjectStore(ORDER_STORE, { keyPath: 'id' });
+            }
+        });
+        request.addEventListener('success', () => resolve(request.result), { once: true });
+        request.addEventListener('error', () => reject(request.error), { once: true });
+    });
+}
+
+async function saveOrderLocally(order) {
+    const database = await openOrderDatabase();
+
+    return new Promise((resolve, reject) => {
+        const transaction = database.transaction(ORDER_STORE, 'readwrite');
+        transaction.objectStore(ORDER_STORE).put(order);
+        transaction.addEventListener('complete', () => {
+            database.close();
+            resolve();
+        }, { once: true });
+        transaction.addEventListener('error', () => {
+            database.close();
+            reject(transaction.error);
+        }, { once: true });
+        transaction.addEventListener('abort', () => {
+            database.close();
+            reject(transaction.error || new Error('La transacción de IndexedDB fue cancelada.'));
+        }, { once: true });
+    });
+}
+
+async function loadOrderHistory() {
+    const database = await openOrderDatabase();
+
+    const orders = await new Promise((resolve, reject) => {
+        const transaction = database.transaction(ORDER_STORE, 'readonly');
+        const request = transaction.objectStore(ORDER_STORE).getAll();
+        request.addEventListener('success', () => resolve(request.result), { once: true });
+        request.addEventListener('error', () => reject(request.error), { once: true });
+        transaction.addEventListener('complete', () => database.close(), { once: true });
+        transaction.addEventListener('abort', () => {
+            database.close();
+            reject(transaction.error || new Error('No se pudo leer el historial de IndexedDB.'));
+        }, { once: true });
+    });
+
+    orders.sort((first, second) => new Date(second.createdAt) - new Date(first.createdAt));
+    orderHistory.replaceChildren();
+    historyEmpty.hidden = orders.length > 0;
+
+    orders.forEach((order) => {
+        const entry = document.createElement('li');
+        entry.className = 'history-card';
+
+        const heading = document.createElement('div');
+        heading.className = 'history-card-heading';
+        const number = document.createElement('strong');
+        number.textContent = `Pedido #${order.id}`;
+        const date = document.createElement('time');
+        date.dateTime = order.createdAt;
+        date.textContent = new Date(order.createdAt).toLocaleString('es-MX');
+        heading.append(number, date);
+
+        const items = document.createElement('p');
+        items.textContent = order.items.map((item) => `${item.quantity} × ${item.name}`).join(', ');
+        const total = document.createElement('strong');
+        total.className = 'history-total';
+        total.textContent = `$${order.total}`;
+        entry.append(heading, items, total);
+        orderHistory.append(entry);
+    });
+}
 
 function updateOrder() {
     const quantity = [...cart.values()].reduce((sum, item) => sum + item.quantity, 0);
@@ -88,9 +170,28 @@ checkoutButton.addEventListener('click', async () => {
             throw new Error(result.message || 'No se pudo guardar el pedido.');
         }
 
+        const savedOrder = {
+            id: result.id,
+            total: result.total,
+            status: result.status,
+            createdAt: new Date().toISOString(),
+            items: [...cart.values()].map((item) => ({
+                name: item.name,
+                quantity: item.quantity,
+                unitPrice: item.price,
+            })),
+        };
         cart.clear();
         updateOrder();
-        showToast(`Pedido #${result.id} guardado. ¡Pasa a recogerlo en 15 minutos!`);
+
+        try {
+            await saveOrderLocally(savedOrder);
+            await loadOrderHistory();
+            showToast(`Pedido #${result.id} guardado. ¡Pasa a recogerlo en 15 minutos!`);
+        } catch (error) {
+            console.error('El servidor guardó el pedido, pero no se pudo guardar en IndexedDB:', error);
+            showToast(`Pedido #${result.id} guardado en el servidor, pero no en el historial local.`);
+        }
     } catch (error) {
         showToast(error.message || 'No se pudo guardar el pedido. Inténtalo de nuevo.');
     } finally {
@@ -103,6 +204,10 @@ const offlineBanner = document.querySelector('#offline-banner');
 function updateConnectionStatus() {
     offlineBanner.hidden = navigator.onLine;
     updateOrder();
+    loadOrderHistory().catch((error) => {
+        console.error('No se pudo cargar el historial de IndexedDB:', error);
+        historyEmpty.textContent = 'No se pudo cargar el historial guardado en este navegador.';
+    });
 }
 
 window.addEventListener('online', updateConnectionStatus);

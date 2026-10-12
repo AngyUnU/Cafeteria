@@ -1,11 +1,11 @@
 # Ejercicio 2: App Shell y Splash Screen nativa
 
-La interfaz responsive de Café de Barrio proporciona el App Shell: encabezado con marca y acciones, navegación, contenido principal con menú y pedido, y pie de página. Los estilos adaptan la cuadrícula y la navegación a pantallas pequeñas.
+El ejemplo `app-shell.html` y su hoja `app-shell.css` implementan el App Shell responsive: encabezado, navegación, contenido, menú, zona del pedido y pie. La versión completa de Café de Barrio está integrada en Laravel.
 
 ## Archivos
 
-- [`welcome.blade.php`](../../resources/views/welcome.blade.php): estructura HTML del encabezado, menú, contenido principal y pie.
-- [`cafeteria.css`](../../public/cafeteria.css): estilos y breakpoints responsive.
+- [`app-shell.html`](./app-shell.html) y [`app-shell.css`](./app-shell.css): código completo de ejemplo para este ejercicio.
+- [`welcome.blade.php`](../../resources/views/welcome.blade.php) y [`cafeteria.css`](../../public/cafeteria.css): implementación integrada y estilos responsive.
 - [`manifest.json`](../../public/manifest.json): `display`, `background_color` y colores usados por el navegador durante la instalación.
 
 ## Comprobación

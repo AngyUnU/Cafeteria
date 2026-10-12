@@ -1,12 +1,12 @@
-const CACHE_NAME = 'cafe-de-barrio-v5';
+const CACHE_NAME = 'cafe-de-barrio-v7';
 const APP_SHELL = [
     '/',
     '/offline.html',
     '/manifest.json',
     '/cafeteria.css',
     '/cafeteria.js',
-    '/pwa-icons/icon-192.png',
-    '/pwa-icons/icon-512.png',
+    '/icons/icon-192.png',
+    '/icons/icon-512.png',
 ];
 
 self.addEventListener('install', (event) => {

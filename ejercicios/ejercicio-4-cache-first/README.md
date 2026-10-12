@@ -1,6 +1,6 @@
 # Ejercicio 4: Cache API y estrategia Cache-First
 
-Durante `install`, el Service Worker precarga el App Shell en una caché con versión. En las peticiones GET del mismo origen, busca primero una respuesta en Cache API y consulta la red si no la encuentra. En `activate`, elimina versiones antiguas de la caché propia sin tocar cachés de otras aplicaciones.
+El Service Worker de ejemplo precarga el App Shell en una caché versionada, atiende primero desde Cache API y elimina únicamente versiones anteriores de su propia caché. La ruta de token CSRF y las peticiones que no sean GET siempre quedan fuera de la caché.
 
 ## Recursos precargados
 
@@ -12,9 +12,9 @@ La ruta `/csrf-token` se consulta directamente en la red para no reutilizar toke
 
 ## Archivos
 
-- [`sw.js`](../../public/sw.js): precarga, versionado, limpieza y resolución Cache-First.
-- [`cafeteria.css`](../../public/cafeteria.css) y [`cafeteria.js`](../../public/cafeteria.js): recursos de interfaz precargados.
+- [`sw.js`](./sw.js): código completo del ejercicio Cache-First.
+- [`cafeteria.css`](../../public/cafeteria.css), [`cafeteria.js`](../../public/cafeteria.js) y [`sw.js`](../../public/sw.js): recursos y estrategia integrados.
 
 ## Comprobación
 
-En DevTools → **Application → Cache Storage**, inspecciona `cafe-de-barrio-v5`. En **Network**, activa modo Offline y recarga la página inicial para confirmar que el App Shell sigue disponible.
+En DevTools → **Application → Cache Storage**, inspecciona `cafe-de-barrio-v7`. En **Network**, activa modo Offline y recarga la página inicial para confirmar que el App Shell sigue disponible.

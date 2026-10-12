@@ -1,11 +1,12 @@
 # Ejercicio 3: registro y ciclo de vida del Service Worker
 
-El JavaScript principal registra `/sw.js` de forma asíncrona cuando la página termina de cargar. El Service Worker atiende `install`, `activate` y `fetch`; durante la activación toma control de las páginas abiertas.
+El ejemplo registra el Service Worker después de cargar la página y muestra sus eventos de ciclo de vida. El archivo de esta carpeta es autónomo; la aplicación integrada combina estos eventos con el App Shell y la estrategia Cache-First.
 
 ## Archivos
 
-- [`cafeteria.js`](../../public/cafeteria.js): registro del Service Worker y reporte del error de registro en consola.
-- [`sw.js`](../../public/sw.js): escuchadores de los eventos `install`, `activate` y `fetch`.
+- [`register-sw.js`](./register-sw.js): registro asíncrono y manejo explícito de errores.
+- [`sw.js`](./sw.js): ciclo de vida `install`, `activate` y `fetch`.
+- [`cafeteria.js`](../../public/cafeteria.js) y [`sw.js`](../../public/sw.js): implementación integrada.
 
 ## Comprobación
 

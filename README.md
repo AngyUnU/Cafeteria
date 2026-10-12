@@ -1,6 +1,6 @@
 # Portafolio de ejercicios PWA
 
-Aplicación de ejemplo **Café de Barrio**, construida con Laravel, que reúne los cinco ejercicios de infraestructura de una Progressive Web App. Cada subcarpeta de [`ejercicios/`](./ejercicios/) describe un ejercicio y señala los archivos que forman parte de la implementación integrada.
+Aplicación de ejemplo **Café de Barrio**, construida con Laravel, que reúne los cinco ejercicios de infraestructura de una Progressive Web App. Cada subcarpeta de [`ejercicios/`](./ejercicios/) contiene el código y la explicación del ejercicio, además de enlaces a la implementación integrada.
 
 ## Ejercicios
 
@@ -27,4 +27,4 @@ El Service Worker requiere un contexto seguro: funciona en `localhost` para desa
 - En **Network**, activa **Offline** y recarga la página principal: el menú se sirve desde caché. Visita una URL que no se haya almacenado para comprobar la página alternativa.
 - La Splash Screen nativa aparece al instalar la aplicación desde Chrome; su presentación depende del navegador y de la plataforma.
 
-Los pedidos requieren conexión al servidor. El modo sin conexión mantiene disponible la interfaz y muestra el aviso de conectividad, pero no encola pedidos para enviarlos más tarde.
+Los pedidos confirmados se guardan en `database/indexBD.sqlite` en el servidor y también en IndexedDB del navegador. El historial se muestra en la página y se puede inspeccionar en DevTools → **Application → IndexedDB → cafe-de-barrio → orders**. Se necesita conexión para confirmar un pedido; el modo sin conexión no encola pedidos para enviarlos más tarde.

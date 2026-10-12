@@ -1,12 +1,13 @@
 # Ejercicio 1: Web App Manifest y metadatos de instalación
 
-El HTML principal enlaza el manifest y define metadatos compatibles con instalación en navegadores móviles. El manifest configura nombre, nombre corto, URL de inicio, alcance, modo `standalone`, colores de tema y fondo, orientación e iconos PNG.
+El archivo `manifest.json` y el ejemplo HTML de esta carpeta definen nombre, nombre corto, URL de inicio, alcance, modo `standalone`, colores de tema y fondo, orientación e iconos PNG. La aplicación integrada usa los mismos valores.
 
 ## Archivos
 
-- [`manifest.json`](../../public/manifest.json)
-- [`welcome.blade.php`](../../resources/views/welcome.blade.php): enlace al manifest, metadatos HTML e iconos de acceso.
-- [`icon-192.png`](../../public/pwa-icons/icon-192.png) y [`icon-512.png`](../../public/pwa-icons/icon-512.png)
+- [`manifest.json`](./manifest.json): manifest completo del ejercicio.
+- [`index.html`](./index.html): ejemplo del enlace al manifest y metadatos de instalación.
+- [`manifest.json`](../../public/manifest.json) y [`welcome.blade.php`](../../resources/views/welcome.blade.php): implementación integrada.
+- Iconos de la aplicación: [`icon-192.png`](../../public/icons/icon-192.png) y [`icon-512.png`](../../public/icons/icon-512.png).
 
 ## Comprobación
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f5ef">
+    <link rel="manifest" href="../../public/manifest.json">
+    <link rel="stylesheet" href="./app-shell.css">
+    <title>Café de Barrio — App Shell</title>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="#inicio">☕ Café de Barrio</a>
+            <nav aria-label="Navegación principal">
+                <a href="#menu">Menú</a>
+                <a href="#pedido">Mi pedido</a>
+            </nav>
+        </header>
+        <main id="inicio">
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">CAFÉ DE ESPECIALIDAD</p>
+                    <h1>Un buen café<br><em>lo cambia todo.</em></h1>
+                    <p>Tu rincón favorito, ahora a un clic.</p>
+                    <a class="button" href="#menu">Explorar el menú →</a>
+                </div>
+                <div class="cup" role="img" aria-label="Taza de café caliente">☕</div>
+            </section>
+            <section id="menu">
+                <h2>Nuestro menú</h2>
+                <div class="menu-grid">
+                    <article><h3>Latte de la casa</h3><p>Espresso doble con leche cremosa.</p></article>
+                    <article><h3>Mocha nube</h3><p>Chocolate artesanal y espuma suave.</p></article>
+                    <article><h3>Croissant</h3><p>Hojaldrado y recién horneado.</p></article>
+                </div>
+            </section>
+            <section id="pedido" class="order"><h2>Tu pedido</h2><p>Elige algo rico del menú.</p></section>
+        </main>
+        <footer>Hecho con cariño y mucho café. © 2026</footer>
+    </div>
+</body>
+</html>

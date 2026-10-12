@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Café de Barrio">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <link rel="icon" href="{{ asset('pwa-icons/icon-192.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('pwa-icons/icon-192.png') }}">
+    <link rel="icon" href="{{ asset('icons/icon-192.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('icons/icon-192.png') }}">
     <link rel="stylesheet" href="{{ asset('cafeteria.css') }}">
     <title>Café de Barrio — Tu pausa favorita</title>
 </head>
@@ -25,6 +25,7 @@
             <nav class="main-nav" aria-label="Navegación principal">
                 <a class="nav-link active" href="#menu">Menú</a>
                 <a class="nav-link" href="#nosotros">Nuestra historia</a>
+                <a class="nav-link" href="#historial">Historial</a>
             </nav>
             <div class="header-actions">
                 <span class="open-status"><span class="status-dot"></span> Abierto hoy</span>
@@ -97,6 +98,14 @@
             <section class="order-section" id="pedido" aria-labelledby="order-title">
                 <div class="order-copy"><span class="order-icon" aria-hidden="true">🛍</span><div><h2 id="order-title">Tu pedido</h2><p id="order-message">Todavía no agregas nada rico. ¡Elige algo del menú!</p></div></div>
                 <div class="order-total"><span>Total</span><strong id="order-total">$0</strong><button class="checkout-button" id="checkout-button" type="button" disabled>Hacer mi pedido <span aria-hidden="true">→</span></button></div>
+            </section>
+            <section class="history-section" id="historial" aria-labelledby="history-title">
+                <div class="section-heading">
+                    <div><span class="eyebrow">TUS PEDIDOS EN ESTE NAVEGADOR</span><h2 id="history-title">Historial de pedidos</h2></div>
+                    <p>Guardado en IndexedDB<br>y en la base de datos del café.</p>
+                </div>
+                <p class="history-empty" id="history-empty">Todavía no hay pedidos guardados en este navegador.</p>
+                <ol class="order-history" id="order-history" aria-live="polite"></ol>
             </section>
             <section class="story-section" id="nosotros"><span class="eyebrow">UN RINCÓN PARA QUEDARSE</span><p>Creemos que los días se disfrutan más <em>con un buen café</em> y buena compañía.</p></section>
         </main>
