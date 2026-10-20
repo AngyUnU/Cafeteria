@@ -26,6 +26,7 @@
                 <a class="nav-link active" href="#menu">Menú</a>
                 <a class="nav-link" href="#nosotros">Nuestra historia</a>
                 <a class="nav-link" href="#historial">Historial</a>
+                <a class="nav-link" href="#ubicacion">Ubicación</a>
             </nav>
             <div class="header-actions">
                 <span class="open-status"><span class="status-dot"></span> Abierto hoy</span>
@@ -106,6 +107,25 @@
                 </div>
                 <p class="history-empty" id="history-empty">Todavía no hay pedidos guardados en este navegador.</p>
                 <ol class="order-history" id="order-history" aria-live="polite"></ol>
+            </section>
+            <section class="location-section" id="ubicacion" aria-labelledby="location-title">
+                <div class="section-heading">
+                    <div><span class="eyebrow">TU UBICACIÓN, SOLO SI TÚ LO PERMITES</span><h2 id="location-title">Permisos y geolocalización</h2></div>
+                    <p>Consulta el permiso y obtén<br>tus coordenadas actuales.</p>
+                </div>
+                <div class="location-card">
+                    <div class="permission-summary">
+                        <span class="permission-label">Permiso de ubicación</span>
+                        <strong id="location-permission" role="status" aria-live="polite">Consultando permiso…</strong>
+                    </div>
+                    <p class="location-description" id="location-message" role="status" aria-live="polite">Al pulsar el botón, el navegador puede pedir permiso. Selecciona Permitir para compartir tu ubicación.</p>
+                    <button class="checkout-button location-button" id="location-button" type="button">Compartir mi ubicación <span aria-hidden="true">→</span></button>
+                    <div class="coordinates" id="location-coordinates" hidden>
+                        <p>Latitud: <strong id="location-latitude"></strong></p>
+                        <p>Longitud: <strong id="location-longitude"></strong></p>
+                    </div>
+                    <a class="map-link" id="location-map" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir ubicación en OpenStreetMap ↗</a>
+                </div>
             </section>
             <section class="story-section" id="nosotros"><span class="eyebrow">UN RINCÓN PARA QUEDARSE</span><p>Creemos que los días se disfrutan más <em>con un buen café</em> y buena compañía.</p></section>
         </main>

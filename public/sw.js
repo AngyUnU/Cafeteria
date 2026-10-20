@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cafe-de-barrio-v7';
+const CACHE_NAME = 'cafe-de-barrio-v8';
 const APP_SHELL = [
     '/',
     '/offline.html',
