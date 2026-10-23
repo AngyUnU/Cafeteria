@@ -27,6 +27,7 @@
                 <a class="nav-link" href="#nosotros">Nuestra historia</a>
                 <a class="nav-link" href="#historial">Historial</a>
                 <a class="nav-link" href="#ubicacion">Ubicación</a>
+                <a class="nav-link" href="#notificaciones">Notificaciones</a>
             </nav>
             <div class="header-actions">
                 <span class="open-status"><span class="status-dot"></span> Abierto hoy</span>
@@ -125,6 +126,16 @@
                         <p>Longitud: <strong id="location-longitude"></strong></p>
                     </div>
                     <a class="map-link" id="location-map" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir ubicación en OpenStreetMap ↗</a>
+                </div>
+            </section>
+            <section class="location-section" id="notificaciones" aria-labelledby="notification-title">
+                <div class="section-heading">
+                    <div><span class="eyebrow">AVISOS DE CAFÉ DE BARRIO</span><h2 id="notification-title">Notificaciones locales</h2></div>
+                    <p>Recibe un aviso personalizado<br>desde el Service Worker.</p>
+                </div>
+                <div class="location-card">
+                    <p class="location-description" id="notification-message" role="status" aria-live="polite">Pulsa el botón para solicitar permiso y mostrar una notificación de prueba.</p>
+                    <button class="checkout-button location-button" id="notification-button" type="button">Activar notificaciones <span aria-hidden="true">→</span></button>
                 </div>
             </section>
             <section class="story-section" id="nosotros"><span class="eyebrow">UN RINCÓN PARA QUEDARSE</span><p>Creemos que los días se disfrutan más <em>con un buen café</em> y buena compañía.</p></section>

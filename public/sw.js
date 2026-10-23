@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cafe-de-barrio-v8';
+const CACHE_NAME = 'cafe-de-barrio-v9';
 const APP_SHELL = [
     '/',
     '/offline.html',
@@ -37,6 +37,30 @@ self.addEventListener('activate', (event) => {
             ))
             .then(() => self.clients.claim()),
     );
+});
+
+self.addEventListener('message', (event) => {
+    if (event.data?.type !== 'SHOW_LOCAL_NOTIFICATION') return;
+
+    const responsePort = event.ports[0];
+    event.waitUntil(
+        self.registration.showNotification('Café de Barrio', {
+            body: 'Tu pausa favorita te espera. ¡Pasa por un cafecito!',
+            icon: '/icons/icon-192.png',
+            vibrate: [200, 100, 200],
+            tag: 'cafe-de-barrio-local',
+        }).then(() => {
+            responsePort?.postMessage({ success: true });
+        }).catch((error) => {
+            console.error('No se pudo mostrar la notificación local:', error);
+            responsePort?.postMessage({ success: false, error: error.message });
+        }),
+    );
+});
+
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    event.waitUntil(self.clients.openWindow('/'));
 });
 
 self.addEventListener('fetch', (event) => {

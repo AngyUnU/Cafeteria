@@ -114,6 +114,8 @@ const locationCoordinates = document.querySelector('#location-coordinates');
 const locationLatitude = document.querySelector('#location-latitude');
 const locationLongitude = document.querySelector('#location-longitude');
 const locationMap = document.querySelector('#location-map');
+const notificationButton = document.querySelector('#notification-button');
+const notificationMessage = document.querySelector('#notification-message');
 const GEOLOCATION_ERROR = {
     PERMISSION_DENIED: 1,
     POSITION_UNAVAILABLE: 2,
@@ -196,6 +198,66 @@ locationButton.addEventListener('click', () => {
 });
 
 checkLocationPermission();
+
+notificationButton.addEventListener('click', async () => {
+    if (!window.isSecureContext) {
+        notificationMessage.textContent = 'Las notificaciones requieren HTTPS o localhost.';
+        return;
+    }
+
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+        notificationMessage.textContent = 'Este navegador no ofrece notificaciones locales con Service Worker.';
+        return;
+    }
+
+    notificationButton.disabled = true;
+    notificationMessage.textContent = 'Solicitando permiso para mostrar notificaciones…';
+
+    try {
+        const permission = Notification.permission === 'default'
+            ? await Notification.requestPermission()
+            : Notification.permission;
+
+        if (permission !== 'granted') {
+            notificationMessage.textContent = permission === 'denied'
+                ? 'Permiso denegado. Puedes cambiarlo desde la configuración del navegador.'
+                : 'No se concedió el permiso para mostrar notificaciones.';
+            return;
+        }
+
+        const registration = await navigator.serviceWorker.ready;
+        const channel = new MessageChannel();
+        const notificationResult = new Promise((resolve, reject) => {
+            const timeout = window.setTimeout(() => {
+                channel.port1.close();
+                reject(new Error('El Service Worker no respondió a tiempo.'));
+            }, 10000);
+
+            channel.port1.addEventListener('message', (event) => {
+                window.clearTimeout(timeout);
+                channel.port1.close();
+
+                if (event.data?.success) {
+                    resolve();
+                } else {
+                    reject(new Error(event.data?.error || 'No se pudo mostrar la notificación.'));
+                }
+            }, { once: true });
+        });
+
+        registration.active.postMessage(
+            { type: 'SHOW_LOCAL_NOTIFICATION' },
+            [channel.port2],
+        );
+        await notificationResult;
+        notificationMessage.textContent = 'Permiso concedido. Se mostró la notificación de Café de Barrio.';
+    } catch (error) {
+        console.error('No se pudo mostrar la notificación local:', error);
+        notificationMessage.textContent = `No se pudo mostrar la notificación: ${error.message}`;
+    } finally {
+        notificationButton.disabled = false;
+    }
+});
 
 document.querySelectorAll('.add-button').forEach((button) => {
     button.addEventListener('click', () => {
