@@ -109,6 +109,21 @@
                 <p class="history-empty" id="history-empty">Todavía no hay pedidos guardados en este navegador.</p>
                 <ol class="order-history" id="order-history" aria-live="polite"></ol>
             </section>
+            <section class="history-section local-records-section" id="registros-locales" aria-labelledby="local-records-title">
+                <div class="section-heading">
+                    <div><span class="eyebrow">DATOS GUARDADOS EN ESTE DISPOSITIVO</span><h2 id="local-records-title">Notas locales</h2></div>
+                    <p>Guarda y consulta tus notas<br>incluso sin conexión.</p>
+                </div>
+                <form class="local-record-form" id="local-record-form">
+                    <label for="local-record-title">Título</label>
+                    <input id="local-record-title" name="title" type="text" maxlength="80" required>
+                    <label for="local-record-description">Nota</label>
+                    <textarea id="local-record-description" name="description" rows="3" maxlength="500" required></textarea>
+                    <button class="checkout-button location-button" id="local-record-submit" type="submit">Guardar nota <span aria-hidden="true">→</span></button>
+                </form>
+                <p class="history-empty" id="local-record-status" role="status" aria-live="polite">Cargando notas guardadas…</p>
+                <ul class="local-record-list" id="local-record-list"></ul>
+            </section>
             <section class="location-section" id="ubicacion" aria-labelledby="location-title">
                 <div class="section-heading">
                     <div><span class="eyebrow">TU UBICACIÓN, SOLO SI TÚ LO PERMITES</span><h2 id="location-title">Permisos y geolocalización</h2></div>
