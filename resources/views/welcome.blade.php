@@ -97,6 +97,15 @@
                 </div>
             </section>
 
+            <section class="coffee-api-section history-section" id="ideas-cafeteras" aria-labelledby="coffee-api-title">
+                <div class="section-heading">
+                    <div><span class="eyebrow">RECETAS DESDE UNA API REMOTA</span><h2 id="coffee-api-title">Ideas cafeteras</h2></div>
+                    <button class="coffee-api-refresh" id="coffee-api-refresh" type="button">Actualizar recetas</button>
+                </div>
+                <p class="history-empty" id="coffee-api-status" role="status" aria-live="polite">Cargando recetas…</p>
+                <ul class="coffee-api-list" id="coffee-api-list" aria-live="polite"></ul>
+            </section>
+
             <section class="order-section" id="pedido" aria-labelledby="order-title">
                 <div class="order-copy"><span class="order-icon" aria-hidden="true">🛍</span><div><h2 id="order-title">Tu pedido</h2><p id="order-message">Todavía no agregas nada rico. ¡Elige algo del menú!</p></div></div>
                 <div class="order-total"><span>Total</span><strong id="order-total">$0</strong><button class="checkout-button" id="checkout-button" type="button" disabled>Hacer mi pedido <span aria-hidden="true">→</span></button></div>

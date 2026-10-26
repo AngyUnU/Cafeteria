@@ -1,6 +1,6 @@
 # Portafolio de ejercicios PWA
 
-Aplicación de ejemplo **Café de Barrio**, construida con Laravel, que reúne nueve ejercicios de infraestructura de una Progressive Web App. Cada subcarpeta de [`ejercicios/`](./ejercicios/) contiene el código del ejercicio y enlaces a la implementación integrada.
+Aplicación de ejemplo **Café de Barrio**, construida con Laravel, que reúne diez ejercicios de infraestructura de una Progressive Web App. Cada subcarpeta de [`ejercicios/`](./ejercicios/) contiene el código del ejercicio y enlaces a la implementación integrada.
 
 ## Ejercicios
 
@@ -13,6 +13,7 @@ Aplicación de ejemplo **Café de Barrio**, construida con Laravel, que reúne n
 7. [Captura de medios](./ejercicios/ejercicio-7-captura-medios/README.md)
 8. [Notificaciones push locales desde el Service Worker](./ejercicios/ejercicio-8-notificaciones-locales/README.md)
 9. [Persistencia de datos asíncrona con IndexedDB](./ejercicios/ejercicio-9-indexeddb/README.md)
+10. [Caché dinámica de API con estrategia Network-First e IndexedDB](./ejercicios/ejercicio-10-cache-dinamica-api/README.md)
 
 ## Ejecutar localmente
 
